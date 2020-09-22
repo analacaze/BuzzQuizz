@@ -10,10 +10,11 @@ function entrarLogin(){
         var login = {email: email.value, password: senha.value}
         var requisicao = axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v1/buzzquizz/users",login);
     }
-    requisicao.catch(erroLogin);
+    requisicao.then(abrirTelaQuizzes).catch(erroLogin);
 }
 
-function erroLogin(){
+function erroLogin(erro){
     alert("Email/Senha incorretos");
+    console.log(erro);
 }
 

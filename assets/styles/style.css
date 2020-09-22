@@ -2,6 +2,10 @@ body{
     font-family: 'Roboto', sans-serif;
 }
 
+.fechada{
+    display:none;
+}
+
 /*TELA LOGIN*/
 .tela-login{
     width: 100vw;
@@ -68,7 +72,7 @@ body{
 .tela-quizes{
     padding: 100px 50px;
     width: 100vw;
-    display:none;
+    display:flex;
     flex-wrap:wrap;
 }
 .tela-quizes button{
