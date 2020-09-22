@@ -216,7 +216,7 @@ body{
     width: 600px;
     margin:auto;
     padding:100px 0;
-    display:flex;
+    display:none;
     flex-wrap: wrap;
     justify-content: space-between;
     font-family: 'Merriweather', serif;
@@ -247,4 +247,59 @@ body{
 }
 .tela-fim-quiz img{
     width: 50%;
+}
+
+
+/*MOBILE*/
+
+@media (max-width: 600px){
+    .tela-quizes{
+        justify-content: center;
+    }
+    .tela-novo-quiz{
+        width: 90%;
+    }
+    .tela-novo-quiz li{
+        width: 100%;
+    }
+    .tela-novo-quiz li .correta{
+        width:100%;
+    }
+    .tela-novo-quiz li .errada{
+        width:100%;
+    }
+    .tela-novo-quiz li .porcentagem{
+        width:100%;
+    }
+    .tela-quiz{
+        width: 90%;
+        flex-direction: column;
+        align-items: center;
+    }
+    .tela-quiz h1{
+        font-size: 30px;        
+    }
+    .tela-quiz .pergunta{
+        font-size: 20px;
+    }
+    .tela-quiz .opcao-resposta{
+        width: 250px;
+    }
+    .tela-fim-quiz{
+        width: 90%;
+    }
+    .tela-fim-quiz h1{
+        font-size: 30px;        
+    }
+    .tela-fim-quiz .resultado{
+        font-size: 20px;
+    }
+    .tela-fim-quiz .texto{
+        width: 100%;
+        text-align: center;
+    }
+    .tela-fim-quiz img{
+        width: 250px;
+        margin:20px auto;
+    }
 }
