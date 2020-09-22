@@ -30,15 +30,15 @@
     <!--Tela de Quizes-->
     <section class="tela-quizes fechada">
         <ul>
-            <li class="botao">
+            <li class="botao" onclick="criarNovoQuiz()">
                 Novo Quizz
                 <ion-icon class="icone" name="add-circle"></ion-icon>
             </li>
         </ul>
     </section>
-    
 
-    <section class="tela-novo-quiz">
+
+    <section class="tela-novo-quiz fechada">
         <input type="text" placeholder="Digite o título do seu quizz">
         <ul class="perguntas">
             <li>
@@ -110,6 +110,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.20.0/axios.min.js" integrity="sha512-quHCp3WbBNkwLfYUMd+KwBAgpVukJu5MncuQaWXgCrfgcxCJAq/fo+oqrRKOj+UKEmyMCG3tb8RB63W+EmrOBg==" crossorigin="anonymous"></script>
     <script src="assets/scripts/telaLogin.js"></script>
     <script src="assets/scripts/telaQuizes.js"></script>
+    <script src="assets/scripts/telaNovoQuiz.js"></script>
     <script src="https://unpkg.com/ionicons@5.1.2/dist/ionicons.js"></script>   
 </body>
 </html>

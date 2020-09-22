@@ -34,3 +34,7 @@ function renderizarQuiz(quiz){
     quiz.innerText = "O quão potter head você é?";
     quiz.setAttribute("class","quiz");
 }
+
+function criarNovoQuiz(){
+    abrirTelaNovoQuiz();
+}
