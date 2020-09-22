@@ -10,7 +10,6 @@ body{
     flex-direction: column;
     align-items: center;
     padding: 100px 0;
-    display: none;
 }
 .tela-login h1{
     font-size: 40px;
@@ -37,6 +36,9 @@ body{
     width: 100%;
     height: 30%;
     outline-style: none;
+    border:none;
+    border-radius:10px;
+    padding:0 10px;
 }
 .tela-login button{
     background:#191970;
@@ -45,6 +47,7 @@ body{
     border:none;
     border-radius: 10px;
     color:white;
+    cursor: pointer;
 }
 
 /*TOPO*/
