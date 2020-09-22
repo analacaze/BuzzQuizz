@@ -10,5 +10,10 @@ function entrarLogin(){
         var login = {email: email.value, password: senha.value}
         var requisicao = axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v1/buzzquizz/users",login);
     }
+    requisicao.catch(erroLogin);
+}
+
+function erroLogin(){
+    alert("Email/Senha incorretos");
 }
 
