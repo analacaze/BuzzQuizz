@@ -72,10 +72,8 @@ body{
 .tela-quizes{
     padding: 100px 50px;
     width: 100vw;
-    display:flex;
-    flex-wrap:wrap;
 }
-.tela-quizes button{
+.tela-quizes .botao{
     width: 120px;
     height: 120px;
     background: #4169E1;
@@ -94,6 +92,10 @@ body{
 }
 .tela-quizes .icone{
     font-size: 24px;
+}
+.tela-quizes ul{
+    display:flex;
+    flex-wrap:wrap;
 }
 .tela-quizes .quiz {
     width: 120px;
@@ -260,7 +262,7 @@ body{
 /*MOBILE*/
 
 @media (max-width: 600px){
-    .tela-quizes{
+    .tela-quizes ul{
         justify-content: center;
     }
     .tela-novo-quiz{

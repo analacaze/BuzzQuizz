@@ -11,7 +11,7 @@ function entrarLogin(){
         desabilitarBotao();
         var login = {email: email.value, password: senha.value}
         var requisicao = axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v1/buzzquizz/users",login);
-        requisicao.then(abrirTelaQuizzes).catch(erroLogin);
+        requisicao.then(abrirTelaQuizes).catch(erroLogin);
     }    
 }
 function desabilitarBotao(){
