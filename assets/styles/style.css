@@ -175,7 +175,7 @@ body{
     width: 600px;
     margin:auto;
     padding:100px 0;
-    display:flex;
+    display:none;
     flex-wrap: wrap;
     justify-content: space-between;
     font-family: 'Merriweather', serif;
@@ -208,4 +208,43 @@ body{
 .tela-quiz img{
     width: 100%;
     height: 150px;
+}
+
+
+/*TELA FIM DO QUIZ*/
+.tela-fim-quiz{
+    width: 600px;
+    margin:auto;
+    padding:100px 0;
+    display:flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    font-family: 'Merriweather', serif;
+}
+
+.tela-fim-quiz h1{
+    width: 100%;
+    font-size: 40px;
+}
+
+.tela-fim-quiz .resultado{
+    background: #4169E1;
+    padding: 20px;
+    width: 100%;
+    color:white;
+    font-size:26px;
+    text-align: center;
+    margin: 20px 0;
+}
+.tela-fim-quiz .texto{
+    width: 48%;
+    color:grey;
+}
+.tela-fim-quiz h3{
+    font-weight: bold;
+    font-size:22px;
+    margin-bottom: 10px;
+}
+.tela-fim-quiz img{
+    width: 50%;
 }
