@@ -8,7 +8,7 @@ function abrirTelaQuizes(token){
 function trocarTelas(seletorTelaAntiga,seletorTelaAtual){
     var telaAntiga = document.querySelector(seletorTelaAntiga);
     var telaAtual = document.querySelector(seletorTelaAtual);
-    telaAntiga.setAttribute("class","fechada");
+    telaAntiga.classList.add("fechada");
     telaAtual.classList.remove("fechada");
 }
 function salvarToken(token){
@@ -22,18 +22,19 @@ function listarQuizes(quizes){
     var lista = document.querySelector(".tela-quizes ul")
     var tamanho = quizes.data.length;
 
-    for (var i = 0; i<1; i++){
+    for (var i = 0; i<tamanho; i++){
         var quiz = document.createElement("li");
         renderizarQuiz(quiz);
         lista.appendChild(quiz);
     }
     console.log(tamanho);
 }
+function criarNovoQuiz(){
+    abrirTelaNovoQuiz();
+}
+
+//Renderizar
 function renderizarQuiz(quiz){
     quiz.innerText = "O quão potter head você é?";
     quiz.setAttribute("class","quiz");
-}
-
-function criarNovoQuiz(){
-    abrirTelaNovoQuiz();
 }

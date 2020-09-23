@@ -37,14 +37,14 @@
         </ul>
     </section>
 
-    <!--Tela de Novo QUiz-->
+    <!--Tela de Novo Quiz-->
     <section class="tela-novo-quiz fechada">
-        <input type="text" placeholder="Digite o título do seu quizz">
+        <input class="titulo-quiz" type="text" placeholder="Digite o título do seu quizz">
         <ul class="perguntas"></ul>
         <ion-icon class="icone" onclick="adicionarPergunta()" name="add-circle"></ion-icon>
         <ul class="niveis"></ul>
         <ion-icon class="icone" onclick="adicionarNivel()" name="add-circle"></ion-icon>
-        <button>Publicar</button>
+        <button onclick="publicarQuiz()">Publicar</button>
     </section>
 
     <section class="tela-quiz">

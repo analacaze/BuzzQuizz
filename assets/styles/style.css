@@ -3,7 +3,7 @@ body{
 }
 
 .fechada{
-    display:none;
+    display: none !important;
 }
 
 /*TELA LOGIN*/
@@ -176,6 +176,7 @@ body{
     border:none;
     border-radius: 10px;
     margin: 20px 0;
+    cursor: pointer;
 }
 
 /*TELA QUIZ*/

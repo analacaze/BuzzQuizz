@@ -1,12 +1,14 @@
+var tituloQuiz = document.querySelector(".tela-novo-quiz .titulo-quiz");
+tituloQuiz.value="";
 var numeroPergunta = 1;
 var numeroNiveis = 1;
+var informacoes = {title:"", data:{ perguntas:[{titulo:"",respostas:""}], niveis:[{titulo:"",porcentagens:"",link:"",descricao:""}]}};
 
 function abrirTelaNovoQuiz(){
     trocarTelas(".tela-quizes",".tela-novo-quiz");
     adicionarPergunta();
     adicionarNivel();
 }
-
 function adicionarPergunta(){
     var perguntas = document.querySelector(".tela-novo-quiz .perguntas");
     var pergunta = document.createElement("li");
@@ -21,7 +23,43 @@ function adicionarNivel(){
     niveis.appendChild(nivel); 
     numeroNiveis++;
 }
+function publicarQuiz(){
+    var camposPergunta = document.querySelectorAll(".tela-novo-quiz .perguntas li input");
+    var camposNivel = document.querySelectorAll(".tela-novo-quiz .niveis li input");
 
+    for (var i=0; i<camposPergunta.length; i++){
+        if (camposPergunta[i].value==="" || tituloQuiz.value === "" ){
+            alert("Preencha os campos título, pergunta e nivel");
+            return;
+        }
+    }
+    for (var i=0; i<camposNivel.length; i++){
+        if (camposNivel[i].value==="" || tituloQuiz.value === "" ){
+            alert("Preencha os campos título, pergunta e nivel");
+            return;
+        }
+    }
+    
+    salvarInformacoes(camposPergunta,camposNivel);
+    var requisicao = axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v1/buzzquizz/quizzes",informacoes,headerToken);
+    requisicao.then(fecharTelaNovoQuiz);
+}
+function fecharTelaNovoQuiz(){
+    trocarTelas(".tela-novo-quiz",".tela-quizes");
+    pegarQuizes();
+}
+function salvarInformacoes(camposPergunta,camposNivel){
+    informacoes.title = tituloQuiz.value;
+    informacoes.data.perguntas.titulo = camposPergunta[0].value;
+    informacoes.data.perguntas.respostas = [camposPergunta[1].value,camposPergunta[2].value,camposPergunta[3].value,camposPergunta[4].value,
+                                            camposPergunta[5].value,camposPergunta[6].value,camposPergunta[7].value,camposPergunta[8].value];
+    informacoes.data.niveis.porcentagens = [camposNivel[0].value,camposNivel[1].value];
+    informacoes.data.niveis.titulo = camposNivel[2].value;  
+    informacoes.data.niveis.link = camposNivel[3].value;
+    informacoes.data.niveis.descricao = camposNivel[4].value;
+}
+
+//Renderizar
 function renderizarPergunta(pergunta){
     pergunta.innerHTML = "<h1>Pergunta "+numeroPergunta+"</h1>"+
                         "<input type='text' placeholder='Digite a pergunta'>"+
