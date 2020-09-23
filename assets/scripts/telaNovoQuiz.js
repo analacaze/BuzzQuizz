@@ -6,6 +6,8 @@ var informacoes = {title:"", data:{ perguntas:[{titulo:"",respostas:""}], niveis
 
 function abrirTelaNovoQuiz(){
     trocarTelas(".tela-quizes",".tela-novo-quiz");
+    numeroPergunta=1;
+    numeroNiveis=1;
     adicionarPergunta();
     adicionarNivel();
 }
@@ -39,7 +41,7 @@ function publicarQuiz(){
             return;
         }
     }
-    
+    validarInformacoes(camposPergunta);
     salvarInformacoes(camposPergunta,camposNivel);
     var requisicao = axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v1/buzzquizz/quizzes",informacoes,headerToken);
     requisicao.then(fecharTelaNovoQuiz);
@@ -47,6 +49,20 @@ function publicarQuiz(){
 function fecharTelaNovoQuiz(){
     trocarTelas(".tela-novo-quiz",".tela-quizes");
     pegarQuizes();
+}
+function validarInformacoes(camposPergunta){
+    tituloQuiz.value = validarPrimeiraLetra(tituloQuiz.value);
+    for (var i =0; i<9; i++){
+        camposPergunta[i].value = validarPrimeiraLetra(camposPergunta[i].value);
+    }
+}
+
+function validarPrimeiraLetra(titulo){
+    var primeiraLetra = titulo.charAt(0);
+    var primeiraLetraMaiuscula = primeiraLetra.toUpperCase();
+    var letrasMinusculas = titulo.substring(1);
+    titulo = primeiraLetraMaiuscula+letrasMinusculas;
+    return titulo;    
 }
 function salvarInformacoes(camposPergunta,camposNivel){
     informacoes.title = tituloQuiz.value;
@@ -57,6 +73,9 @@ function salvarInformacoes(camposPergunta,camposNivel){
     informacoes.data.niveis.titulo = camposNivel[2].value;  
     informacoes.data.niveis.link = camposNivel[3].value;
     informacoes.data.niveis.descricao = camposNivel[4].value;
+
+    console.log(informacoes.data.perguntas);
+    console.log(informacoes.title);
 }
 
 //Renderizar
