@@ -5,7 +5,6 @@ function abrirTelaQuizes(token){
     salvarToken(token.data.token);
     pegarQuizes();
 }
-
 function trocarTelas(seletorTelaAntiga,seletorTelaAtual){
     var telaAntiga = document.querySelector(seletorTelaAntiga);
     var telaAtual = document.querySelector(seletorTelaAtual);

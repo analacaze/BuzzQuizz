@@ -119,8 +119,7 @@ body{
     width: 600px;
     margin:auto;
     padding:100px 0;
-    flex-direction: column;
-    align-items: center;
+    text-align: center;
 }
 .tela-novo-quiz > input{
     width: 100%;
@@ -167,6 +166,7 @@ body{
 .tela-novo-quiz .icone{
     color:#4169E1;
     font-size:30px;
+    cursor: pointer;
 }
 .tela-novo-quiz button{
     width: 100%;

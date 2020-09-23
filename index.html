@@ -11,7 +11,6 @@
 </head>
 
 <body>
-
     <!--Tela de Login-->
     <section class="tela-login">
         <h1>BuzzQuizz</h1>
@@ -23,6 +22,7 @@
         </div>
     </section>
 
+    <!--Topo-->
     <header class="topo">
         <h1>BuzzQuizz</h1>
     </header>
@@ -37,35 +37,13 @@
         </ul>
     </section>
 
-
+    <!--Tela de Novo QUiz-->
     <section class="tela-novo-quiz fechada">
         <input type="text" placeholder="Digite o título do seu quizz">
-        <ul class="perguntas">
-            <li>
-                <h1>Pergunta 1</h1>
-                <input type="text" placeholder="Digite a pergunta">
-                <input class="correta" type="text" placeholder="Digite a resposta correta">
-                <input class="correta" type="text" placeholder="Link para imagem correta">
-                <input class="errada" type="text" placeholder="Digite uma resposta errada 1">
-                <input class="errada" placeholder="Link para imagem errada 1">
-                <input class="errada" placeholder="Digite uma resposta errada 2">
-                <input class="errada" placeholder="Link para imagem errada 2">
-                <input class="errada" placeholder="Digite uma resposta errada 3">
-                <input class="errada" placeholder="Link para imagem errada 3">
-            </li>
-        </ul>
-        <ion-icon class="icone" name="add-circle"></ion-icon>
-        <ul class="niveis">
-            <li>
-                <h1>Nível 1</h1>
-                <input class="porcentagem" type="text" placeholder="% Mínima de acerto do nível">
-                <input class="porcentagem" type="text" placeholder="% Máxima de acerto do nível">
-                <input type="text" placeholder="Título do nível">
-                <input type="text" placeholder="Link da imagem do nível">
-                <input type="text" placeholder="Descrição do nível">
-            </li>
-        </ul>
-        <ion-icon class="icone" name="add-circle"></ion-icon>
+        <ul class="perguntas"></ul>
+        <ion-icon class="icone" onclick="adicionarPergunta()" name="add-circle"></ion-icon>
+        <ul class="niveis"></ul>
+        <ion-icon class="icone" onclick="adicionarNivel()" name="add-circle"></ion-icon>
         <button>Publicar</button>
     </section>
 
