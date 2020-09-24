@@ -3,6 +3,8 @@ var perguntas = document.querySelector(".tela-novo-quiz .perguntas");
 var niveis = document.querySelector(".tela-novo-quiz .niveis");
 var numeroPergunta;
 var numeroNiveis;
+var camposEmBranco;
+var pontoInterrogacao;
 var informacoes = {title:"", data:{ perguntas:[], niveis:[]}};
 
 function abrirTelaNovoQuiz(){
@@ -30,10 +32,15 @@ function adicionarNivel(){
 }
 
 function publicarQuiz(){
+    camposEmBranco = 0;
     percorrerPerguntas();
-    percorrerNiveis();
-    var requisicao = axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v1/buzzquizz/quizzes",informacoes,headerToken);
-    requisicao.then(fecharTelaNovoQuiz);
+    if (camposEmBranco === 0 && pontoInterrogacao !== -1){
+        percorrerNiveis();
+        if (camposEmBranco === 0){
+            var requisicao = axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v1/buzzquizz/quizzes",informacoes,headerToken);
+            requisicao.then(fecharTelaNovoQuiz);
+        }    
+    }
 }
 
 function percorrerPerguntas(){
@@ -44,6 +51,7 @@ function percorrerPerguntas(){
             for (var j=0; j<camposPergunta.length; j++){
                 if (camposPergunta[j].value==="" || tituloQuiz.value === "" ){
                     alert("Preencha os campos título, pergunta e nivel");
+                    camposEmBranco++;
                     return;
                 }
             }
@@ -59,6 +67,7 @@ function percorrerNiveis(){
             for (var j=0; j<camposNivel.length; j++){
                 if (camposNivel[j].value===""){
                     alert("Preencha os campos título, pergunta e nivel");
+                    camposEmBranco++;
                     return;
                 }
             }
@@ -68,12 +77,17 @@ function percorrerNiveis(){
 }
 
 function validarInformacoes(camposPergunta){
-    tituloQuiz.value = retirarEspacos(tituloQuiz.value);
+    tituloQuiz.value = validarEspacos(tituloQuiz.value);
     tituloQuiz.value = validarPrimeiraLetra(tituloQuiz.value);    
     for (var i = 0; i<9; i++){
-        camposPergunta[i].value = retirarEspacos(camposPergunta[i].value);
+        camposPergunta[i].value = validarEspacos(camposPergunta[i].value);
         camposPergunta[i].value = validarPrimeiraLetra(camposPergunta[i].value);
     }
+    validarPontoInterrogacao(camposPergunta[0].value);
+}
+function validarEspacos(frase){
+    var semEspaco = frase.trim();
+    return semEspaco;
 }
 function validarPrimeiraLetra(frase){
     var primeiraLetra = frase.charAt(0);
@@ -82,10 +96,15 @@ function validarPrimeiraLetra(frase){
     frase = primeiraLetraMaiuscula+letrasMinusculas;
     return frase;    
 }
-function retirarEspacos(frase){
-    var semEspaco = frase.trim();
-    return semEspaco;
+function validarPontoInterrogacao(frase){
+    pontoInterrogacao = frase.lastIndexOf("?");
+    if (pontoInterrogacao === -1 || pontoInterrogacao !== (frase.length-1)){
+        pontoInterrogacao = -1;
+        alert("Perguntas devem ter ponto de interrogação ao final");
+        return;
+    }
 }
+
 function salvarInformacoesPerguntas(camposPergunta,indicePergunta){
     informacoes.data.perguntas[indicePergunta] = {titulo:"",respostas:""};    
     informacoes.title = tituloQuiz.value;
