@@ -15,6 +15,7 @@ function abrirTelaNovoQuiz(){
     adicionarPergunta();
     adicionarNivel();
 }
+
 function adicionarPergunta(){    
     numeroPergunta++;
     var pergunta = document.createElement("li");
@@ -27,7 +28,15 @@ function adicionarNivel(){
     renderizarNivel(nivel);
     niveis.appendChild(nivel);     
 }
+
 function publicarQuiz(){
+    percorrerPerguntas();
+    percorrerNiveis();
+    var requisicao = axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v1/buzzquizz/quizzes",informacoes,headerToken);
+    requisicao.then(fecharTelaNovoQuiz);
+}
+
+function percorrerPerguntas(){
     for (var i=0; i<numeroPergunta; i++){
         var camposPergunta = document.querySelectorAll(".tela-novo-quiz .perguntas li:nth-child("+(i+1)+") input");
         console.log(camposPergunta[0]);
@@ -42,7 +51,8 @@ function publicarQuiz(){
         validarInformacoes(camposPergunta);
         salvarInformacoesPerguntas(camposPergunta,i);        
     }
-    
+}
+function percorrerNiveis(){
     for (var i=0; i<numeroNiveis; i++){
         var camposNivel = document.querySelectorAll(".tela-novo-quiz .niveis li:nth-child("+(i+1)+") input");
         if (i === 0){
@@ -55,26 +65,26 @@ function publicarQuiz(){
         }
         salvarInformacoesNiveis(camposNivel,i);        
     }
-        
-    var requisicao = axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v1/buzzquizz/quizzes",informacoes,headerToken);
-    requisicao.then(fecharTelaNovoQuiz);
 }
-function fecharTelaNovoQuiz(){
-    trocarTelas(".tela-novo-quiz",".tela-quizes");
-    pegarQuizes();
-}
+
 function validarInformacoes(camposPergunta){
-    tituloQuiz.value = validarPrimeiraLetra(tituloQuiz.value);
+    tituloQuiz.value = retirarEspacos(tituloQuiz.value);
+    tituloQuiz.value = validarPrimeiraLetra(tituloQuiz.value);    
     for (var i = 0; i<9; i++){
+        camposPergunta[i].value = retirarEspacos(camposPergunta[i].value);
         camposPergunta[i].value = validarPrimeiraLetra(camposPergunta[i].value);
     }
 }
-function validarPrimeiraLetra(titulo){
-    var primeiraLetra = titulo.charAt(0);
+function validarPrimeiraLetra(frase){
+    var primeiraLetra = frase.charAt(0);
     var primeiraLetraMaiuscula = primeiraLetra.toUpperCase();
-    var letrasMinusculas = titulo.substring(1);
-    titulo = primeiraLetraMaiuscula+letrasMinusculas;
-    return titulo;    
+    var letrasMinusculas = frase.substring(1);
+    frase = primeiraLetraMaiuscula+letrasMinusculas;
+    return frase;    
+}
+function retirarEspacos(frase){
+    var semEspaco = frase.trim();
+    return semEspaco;
 }
 function salvarInformacoesPerguntas(camposPergunta,indicePergunta){
     informacoes.data.perguntas[indicePergunta] = {titulo:"",respostas:""};    
@@ -94,6 +104,12 @@ function salvarInformacoesNiveis(camposNivel,indiceNivel){
     console.log("nivel "+indiceNivel);
     console.log(informacoes.data.niveis[indiceNivel]);
 }
+
+function fecharTelaNovoQuiz(){
+    trocarTelas(".tela-novo-quiz",".tela-quizes");
+    pegarQuizes();
+}
+
 //Renderizar
 function resetarNovoQuiz(elemento){
     elemento.innerHTML="";
