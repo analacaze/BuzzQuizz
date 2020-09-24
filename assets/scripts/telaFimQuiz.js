@@ -1,19 +1,24 @@
+var pontuacao;
 
-
-function abrirTelaFimQuiz(quantidadePerguntas, acertos){
+function abrirTelaFimQuiz(){
     trocarTelas(".tela-quiz",".tela-fim-quiz");
-    renderizarFim(quantidadePerguntas, acertos);
+    calcularPontuacao();
+    renderizarFim();
+}
+function calcularPontuacao(){
+    pontuacao = (acertos/quantidadePerguntas)*100;
+    pontuacao = Math.ceil(pontuacao);
 }
 
 //Renderizar
-function renderizarFim(quantidadePerguntas, acertos){
+function renderizarFim(){
     var telaFim = document.querySelector(".tela-fim-quiz");
-    telaFim.innerHTML = "<h1>O quão Potterhead você é?</h1>"+
+    telaFim.innerHTML = "<h1>"+quiz.title+"</h1>"+
                         "<div class='resultado'>"+
                         "<h2>Você acertou "+acertos+" de "+quantidadePerguntas+" perguntas!</h2>"+
-                        "<h2>Score: 88%</h2></div>"+
+                        "<h2>Score: "+pontuacao+"%</h2></div>"+
                         "<div class='texto'>"+
-                        "<h3>Você é praticamente um aluno de Hogwarts!</h3>"+
-                        "<p>Muito bem! Você realmente está bem antenado com tudo a respeito de 'Harry Potter'. Você pode até fazer o teste de novo para fechar mais uma vez!</p></div>"+
-                        "<img src='assets/imagens/dumbledore.jpg' alt='gato'>";
+                        "<h3>"+quiz.data.niveis[0].titulo+"</h3>"+
+                        "<p>"+quiz.data.niveis[0].descricao+"</p></div>"+
+                        "<img src='"+quiz.data.niveis[0].link+">";
 }

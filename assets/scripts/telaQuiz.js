@@ -26,7 +26,7 @@ function iniciarPerguntas(){
         embaralharRespostas();
         renderizarPerguntas(quiz.title,quiz.data.perguntas[indicePergunta-1]);
     }else{
-        abrirTelaFimQuiz(quantidadePerguntas,acertos);
+        abrirTelaFimQuiz(quiz,quantidadePerguntas,acertos);
     }    
     indicePergunta++;
 }
