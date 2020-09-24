@@ -3,6 +3,7 @@ var id;
 var indicePergunta = 1;
 var quantidadePerguntas;
 var quiz;
+var respostasAleatorias = [];
 
 function abrirTelaQuiz(quiz){
     id = quiz.getAttribute("id");
@@ -21,11 +22,21 @@ function carregarQuiz(quizes){
 }
 function iniciarPerguntas(){
     if (indicePergunta <= quantidadePerguntas){        
+        embaralharRespostas();
         renderizarPerguntas(quiz.title,quiz.data.perguntas[indicePergunta-1]);
     }else{
         alert("acabou");
     }    
     indicePergunta++;
+}
+function embaralharRespostas(){
+    respostasAleatorias=[];
+    respostasAleatorias.push([quiz.data.perguntas[indicePergunta-1].respostaCorreta[0],quiz.data.perguntas[indicePergunta-1].respostaCorreta[1]]);
+    respostasAleatorias.push([quiz.data.perguntas[indicePergunta-1].respostasErradas[0],quiz.data.perguntas[indicePergunta-1].respostasErradas[1]]);
+    respostasAleatorias.push([quiz.data.perguntas[indicePergunta-1].respostasErradas[2],quiz.data.perguntas[indicePergunta-1].respostasErradas[3]]);
+    respostasAleatorias.push([quiz.data.perguntas[indicePergunta-1].respostasErradas[4],quiz.data.perguntas[indicePergunta-1].respostasErradas[5]]);
+    respostasAleatorias = respostasAleatorias.sort(aleatoria);
+    console.log(respostasAleatorias);
 }
 function escolherResposta(){
     mostrarResposta();
@@ -46,8 +57,16 @@ function mostrarResposta(){
 function renderizarPerguntas(titulo,pergunta){
     tela.innerHTML = "<h1>"+titulo+"</h1>"+
                     "<div class='pergunta'><h2>"+indicePergunta+". "+ pergunta.titulo+"</h2></div>"+
-                    "<div onclick='escolherResposta()' class='opcao-resposta'><img src='"+pergunta.respostaCorreta[1]+"'><p>"+pergunta.respostaCorreta[0]+"</p></div>"+
-                    "<div onclick='escolherResposta()' class='opcao-resposta'><img src='"+pergunta.respostasErradas[1]+"'><p>"+pergunta.respostasErradas[0]+"</p></div>"+
-                    "<div onclick='escolherResposta()' class='opcao-resposta'><img src='"+pergunta.respostasErradas[3]+"'><p>"+pergunta.respostasErradas[2]+"</p></div>"+
-                    "<div onclick='escolherResposta()' class='opcao-resposta'><img src='"+pergunta.respostasErradas[5]+"'><p>"+pergunta.respostasErradas[4]+"</p></div>";
+                    "<div onclick='escolherResposta()' class='opcao-resposta'><img src='"+respostasAleatorias[0][1]+"'><p>"+respostasAleatorias[0][0]+"</p></div>"+
+                    "<div onclick='escolherResposta()' class='opcao-resposta'><img src='"+respostasAleatorias[1][1]+"'><p>"+respostasAleatorias[1][0]+"</p></div>"+
+                    "<div onclick='escolherResposta()' class='opcao-resposta'><img src='"+respostasAleatorias[2][1]+"'><p>"+respostasAleatorias[2][0]+"</p></div>"+
+                    "<div onclick='escolherResposta()' class='opcao-resposta'><img src='"+respostasAleatorias[3][1]+"'><p>"+respostasAleatorias[3][0]+"</p></div>";
+}
+
+
+
+
+//Aleatória
+function aleatoria(){
+    return (Math.random() - 0.5);
 }
