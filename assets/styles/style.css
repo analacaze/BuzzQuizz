@@ -216,6 +216,12 @@ body{
     border: 1px solid grey;
     cursor: pointer;
 }
+.tela-quiz .resposta-correta{
+    background: #90EE90;
+}
+.tela-quiz .resposta-errada{
+    background: #FFA07A;
+}
 .tela-quiz .opcao-resposta p{
     margin:10px 20px;
 }

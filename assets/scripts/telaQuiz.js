@@ -6,7 +6,6 @@ var quiz;
 
 function abrirTelaQuiz(quiz){
     id = quiz.getAttribute("id");
-    console.log(quiz);
     trocarTelas(".tela-quizes",".tela-quiz");
     var requisicao = axios.get("https://mock-api.bootcamp.respondeai.com.br/api/v1/buzzquizz/quizzes",headerToken);
     requisicao.then(carregarQuiz);
@@ -21,7 +20,7 @@ function carregarQuiz(quizes){
     }    
 }
 function iniciarPerguntas(){
-    if (indicePergunta <= quantidadePerguntas){
+    if (indicePergunta <= quantidadePerguntas){        
         renderizarPerguntas(quiz.title,quiz.data.perguntas[indicePergunta-1]);
     }else{
         alert("acabou");
@@ -29,16 +28,26 @@ function iniciarPerguntas(){
     indicePergunta++;
 }
 function escolherResposta(){
+    mostrarResposta();
     setTimeout(iniciarPerguntas,2000);
+}
+function mostrarResposta(){
+    var respostas = tela.querySelectorAll(".opcao-resposta");
+    for (var i = 0; i < respostas.length; i++){
+        if (respostas[i].innerText === quiz.data.perguntas[indicePergunta-2].respostaCorreta[0]){
+            respostas[i].classList.add("resposta-correta");
+        }else{
+            respostas[i].classList.add("resposta-errada");
+        }
+    }
 }
 
 //Renderizar
 function renderizarPerguntas(titulo,pergunta){
-    console.log(titulo);
     tela.innerHTML = "<h1>"+titulo+"</h1>"+
                     "<div class='pergunta'><h2>"+indicePergunta+". "+ pergunta.titulo+"</h2></div>"+
-                    "<div onclick='escolherResposta()' class='opcao-resposta'><img src='"+pergunta.respostas[1]+"'><p>"+pergunta.respostas[0]+"</p></div>"+
-                    "<div onclick='escolherResposta()' class='opcao-resposta'><img src='"+pergunta.respostas[3]+"'><p>"+pergunta.respostas[2]+"</p></div>"+
-                    "<div onclick='escolherResposta()' class='opcao-resposta'><img src='"+pergunta.respostas[5]+"'><p>"+pergunta.respostas[4]+"</p></div>"+
-                    "<div onclick='escolherResposta()' class='opcao-resposta'><img src='"+pergunta.respostas[7]+"'><p>"+pergunta.respostas[6]+"</p></div>";
+                    "<div onclick='escolherResposta()' class='opcao-resposta'><img src='"+pergunta.respostaCorreta[1]+"'><p>"+pergunta.respostaCorreta[0]+"</p></div>"+
+                    "<div onclick='escolherResposta()' class='opcao-resposta'><img src='"+pergunta.respostasErradas[1]+"'><p>"+pergunta.respostasErradas[0]+"</p></div>"+
+                    "<div onclick='escolherResposta()' class='opcao-resposta'><img src='"+pergunta.respostasErradas[3]+"'><p>"+pergunta.respostasErradas[2]+"</p></div>"+
+                    "<div onclick='escolherResposta()' class='opcao-resposta'><img src='"+pergunta.respostasErradas[5]+"'><p>"+pergunta.respostasErradas[4]+"</p></div>";
 }

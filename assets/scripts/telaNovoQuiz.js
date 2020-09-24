@@ -106,13 +106,11 @@ function validarPontoInterrogacao(frase){
 }
 
 function salvarInformacoesPerguntas(camposPergunta,indicePergunta){
-    informacoes.data.perguntas[indicePergunta] = {titulo:"",respostas:""};    
+    informacoes.data.perguntas[indicePergunta] = {titulo:"",respostaCorreta:[],respostasErradas:[]};
     informacoes.title = tituloQuiz.value;
     informacoes.data.perguntas[indicePergunta].titulo = camposPergunta[0].value;
-    informacoes.data.perguntas[indicePergunta].respostas = [camposPergunta[1].value,camposPergunta[2].value,camposPergunta[3].value,camposPergunta[4].value,
-                                                            camposPergunta[5].value,camposPergunta[6].value,camposPergunta[7].value,camposPergunta[8].value];
-        console.log("pergunta "+indicePergunta);
-        console.log(informacoes.data.perguntas[indicePergunta]);
+    informacoes.data.perguntas[indicePergunta].respostaCorreta = [camposPergunta[1].value,camposPergunta[2].value];
+    informacoes.data.perguntas[indicePergunta].respostasErradas = [camposPergunta[3].value,camposPergunta[4].value,camposPergunta[5].value,camposPergunta[6].value,camposPergunta[7].value,camposPergunta[8].value];
 }
 function salvarInformacoesNiveis(camposNivel,indiceNivel){
     informacoes.data.niveis[indiceNivel]={titulo:"",porcentagens:"",link:"",descricao:""};
