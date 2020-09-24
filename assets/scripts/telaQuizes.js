@@ -21,10 +21,10 @@ function pegarQuizes(){
 function listarQuizes(quizes){
     var lista = document.querySelector(".tela-quizes ul")
     var tamanho = quizes.data.length;
-
+    resetarQuizes(lista);
     for (var i = 0; i<tamanho; i++){
         var quiz = document.createElement("li");
-        renderizarQuiz(quiz);
+        renderizarQuiz(quiz,quizes.data[i].title);
         lista.appendChild(quiz);
     }
     console.log(tamanho);
@@ -34,7 +34,10 @@ function criarNovoQuiz(){
 }
 
 //Renderizar
-function renderizarQuiz(quiz){
-    quiz.innerText = "O quão potter head você é?";
+function resetarQuizes(quizes){
+    quizes.innerHTML = "<li class='botao' onclick='criarNovoQuiz()'>Novo Quizz<ion-icon class='icone' name='add-circle'></ion-icon></li></ul>"
+}
+function renderizarQuiz(quiz,titulo){
+    quiz.innerText = titulo;
     quiz.setAttribute("class","quiz");
 }
