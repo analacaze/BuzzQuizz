@@ -24,7 +24,7 @@ function listarQuizes(quizes){
     resetarQuizes(lista);
     for (var i = 0; i<tamanho; i++){
         var quiz = document.createElement("li");
-        renderizarQuiz(quiz,quizes.data[i].title);
+        renderizarQuizes(quiz,quizes.data[i]);
         lista.appendChild(quiz);
     }
     console.log(tamanho);
@@ -32,12 +32,17 @@ function listarQuizes(quizes){
 function criarNovoQuiz(){
     abrirTelaNovoQuiz();
 }
+function abrirQuiz(quiz){
+    abrirTelaQuiz(quiz);
+}
 
 //Renderizar
 function resetarQuizes(quizes){
     quizes.innerHTML = "<li class='botao' onclick='criarNovoQuiz()'>Novo Quizz<ion-icon class='icone' name='add-circle'></ion-icon></li></ul>"
 }
-function renderizarQuiz(quiz,titulo){
-    quiz.innerText = titulo;
+function renderizarQuizes(quiz,data){
+    quiz.innerText = data.title;
     quiz.setAttribute("class","quiz");
+    quiz.setAttribute("id",data.id);
+    quiz.setAttribute("onclick","abrirQuiz(this)");
 }
