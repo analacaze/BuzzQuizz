@@ -236,7 +236,7 @@ body{
     width: 600px;
     margin:auto;
     padding:100px 0;
-    display:none;
+    display:flex;
     flex-wrap: wrap;
     justify-content: space-between;
     font-family: 'Merriweather', serif;
