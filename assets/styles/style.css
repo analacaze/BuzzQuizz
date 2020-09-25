@@ -1,7 +1,6 @@
 body{
     font-family: 'Roboto', sans-serif;
 }
-
 .fechada{
     display: none !important;
 }
@@ -92,7 +91,6 @@ body{
     flex-shrink: 0;
     cursor: pointer;
 }
-
 .tela-quizes .icone{
     font-size: 24px;
 }
@@ -115,7 +113,6 @@ body{
     flex-shrink: 0;
     cursor: pointer;
 }
-
 
 /*TELA NOVO QUIZ*/
 .tela-novo-quiz{
@@ -230,7 +227,6 @@ body{
     height: 150px;
 }
 
-
 /*TELA FIM DO QUIZ*/
 .tela-fim-quiz{
     width: 600px;
@@ -241,12 +237,10 @@ body{
     justify-content: space-between;
     font-family: 'Merriweather', serif;
 }
-
 .tela-fim-quiz h1{
     width: 100%;
     font-size: 40px;
 }
-
 .tela-fim-quiz .resultado{
     background: #4169E1;
     padding: 20px;
@@ -267,8 +261,17 @@ body{
 }
 .tela-fim-quiz img{
     width: 50%;
+    border-radius:10px;
 }
-
+.tela-fim-quiz button{
+    background: #4169E1;
+    color:white;
+    border:none;
+    cursor: pointer;
+    border-radius: 10px;
+    height: 40px;
+    margin:20px auto;
+}
 
 /*MOBILE*/
 

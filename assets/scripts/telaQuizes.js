@@ -27,7 +27,6 @@ function listarQuizes(quizes){
         renderizarQuizes(quiz,quizes.data[i]);
         lista.appendChild(quiz);
     }
-    console.log(tamanho);
 }
 function criarNovoQuiz(){
     abrirTelaNovoQuiz();

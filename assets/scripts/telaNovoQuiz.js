@@ -1,11 +1,13 @@
 var tituloQuiz = document.querySelector(".tela-novo-quiz .titulo-quiz");
 var perguntas = document.querySelector(".tela-novo-quiz .perguntas");
 var niveis = document.querySelector(".tela-novo-quiz .niveis");
+var informacoes = {title:"", data:{ perguntas:[], niveis:[]}};
 var numeroPergunta;
 var numeroNiveis;
 var camposEmBranco;
 var pontoInterrogacao;
-var informacoes = {title:"", data:{ perguntas:[], niveis:[]}};
+var porcentagemNumerica;
+
 
 function abrirTelaNovoQuiz(){
     trocarTelas(".tela-quizes",".tela-novo-quiz");
@@ -33,10 +35,12 @@ function adicionarNivel(){
 
 function publicarQuiz(){
     camposEmBranco = 0;
+    porcentagemNumerica = 0;
+    pontoInterrogacao = 0;
     percorrerPerguntas();
     if (camposEmBranco === 0 && pontoInterrogacao !== -1){
         percorrerNiveis();
-        if (camposEmBranco === 0){
+        if (camposEmBranco === 0 && porcentagemNumerica !== -1){
             var requisicao = axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v1/buzzquizz/quizzes",informacoes,headerToken);
             requisicao.then(fecharTelaNovoQuiz);
         }    
@@ -45,8 +49,10 @@ function publicarQuiz(){
 
 function percorrerPerguntas(){
     for (var i=0; i<numeroPergunta; i++){
+        if (pontoInterrogacao === -1){
+            return;
+        }
         var camposPergunta = document.querySelectorAll(".tela-novo-quiz .perguntas li:nth-child("+(i+1)+") input");
-        console.log(camposPergunta[0]);
         if (i === 0){
             for (var j=0; j<camposPergunta.length; j++){
                 if (camposPergunta[j].value==="" || tituloQuiz.value === "" ){
@@ -62,6 +68,9 @@ function percorrerPerguntas(){
 }
 function percorrerNiveis(){
     for (var i=0; i<numeroNiveis; i++){
+        if (porcentagemNumerica === -1){
+            return;
+        }
         var camposNivel = document.querySelectorAll(".tela-novo-quiz .niveis li:nth-child("+(i+1)+") input");
         if (i === 0){
             for (var j=0; j<camposNivel.length; j++){
@@ -72,6 +81,7 @@ function percorrerNiveis(){
                 }
             }
         }
+        validarNiveis(camposNivel);
         salvarInformacoesNiveis(camposNivel,i);        
     }
 }
@@ -104,7 +114,14 @@ function validarPontoInterrogacao(frase){
         return;
     }
 }
-
+function validarNiveis(camposNivel){
+    var regra = /^[0-9]+$/; 
+    if (!camposNivel[0].value.match(regra) || !camposNivel[1].value.match(regra)){
+        porcentagemNumerica = -1;
+        alert("Porcentagem deve ter um valor numerico");
+        return;
+    }
+}
 function salvarInformacoesPerguntas(camposPergunta,indicePergunta){
     informacoes.data.perguntas[indicePergunta] = {titulo:"",respostaCorreta:[],respostasErradas:[]};
     informacoes.title = tituloQuiz.value;
@@ -118,8 +135,6 @@ function salvarInformacoesNiveis(camposNivel,indiceNivel){
     informacoes.data.niveis[indiceNivel].titulo = camposNivel[2].value;  
     informacoes.data.niveis[indiceNivel].link = camposNivel[3].value;
     informacoes.data.niveis[indiceNivel].descricao = camposNivel[4].value;
-    console.log("nivel "+indiceNivel);
-    console.log(informacoes.data.niveis[indiceNivel]);
 }
 
 function fecharTelaNovoQuiz(){

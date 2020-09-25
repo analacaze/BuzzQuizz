@@ -1,16 +1,21 @@
 var tela = document.querySelector(".tela-quiz");
-var id;
-var indicePergunta = 1;
-var quantidadePerguntas;
-var quiz;
 var respostasAleatorias = [];
-var acertos = 0;
+var indicePergunta;
+var quantidadePerguntas;
+var acertos;
+var quiz;
+var id;
 
 function abrirTelaQuiz(quiz){
     id = quiz.getAttribute("id");
     trocarTelas(".tela-quizes",".tela-quiz");
+    resetarQuiz();
     var requisicao = axios.get("https://mock-api.bootcamp.respondeai.com.br/api/v1/buzzquizz/quizzes",headerToken);
     requisicao.then(carregarQuiz);
+}
+function resetarQuiz(){
+    indicePergunta = 1;
+    acertos = 0;
 }
 function carregarQuiz(quizes){
     for (var i = 0; i < quizes.data.length; i++){
@@ -19,7 +24,7 @@ function carregarQuiz(quizes){
             quiz = quizes.data[i];
             iniciarPerguntas(); 
         }
-    }    
+    }  
 }
 function iniciarPerguntas(){
     if (indicePergunta <= quantidadePerguntas){        
@@ -37,7 +42,6 @@ function embaralharRespostas(){
     respostasAleatorias.push([quiz.data.perguntas[indicePergunta-1].respostasErradas[2],quiz.data.perguntas[indicePergunta-1].respostasErradas[3]]);
     respostasAleatorias.push([quiz.data.perguntas[indicePergunta-1].respostasErradas[4],quiz.data.perguntas[indicePergunta-1].respostasErradas[5]]);
     respostasAleatorias = respostasAleatorias.sort(aleatoria);
-    console.log(respostasAleatorias);
 }
 function escolherResposta(respostaEscolhida){
     mostrarResposta(respostaEscolhida);
@@ -66,7 +70,6 @@ function renderizarPerguntas(titulo,pergunta){
                     "<div onclick='escolherResposta(2)' class='opcao-resposta'><img src='"+respostasAleatorias[2][1]+"'><p>"+respostasAleatorias[2][0]+"</p></div>"+
                     "<div onclick='escolherResposta(3)' class='opcao-resposta'><img src='"+respostasAleatorias[3][1]+"'><p>"+respostasAleatorias[3][0]+"</p></div>";
 }
-
 //Aleatória
 function aleatoria(){
     return (Math.random() - 0.5);
