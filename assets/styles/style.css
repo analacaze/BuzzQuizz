@@ -93,6 +93,18 @@ body{
 }
 .tela-quizes .icone{
     font-size: 24px;
+    flex-shrink: 0;
+}
+.tela-quizes .deletar{
+    color:#FFA07A;
+    position:absolute;
+    bottom:0;
+    right:0;
+}
+.tela-quizes .deletar:hover{
+    background: #FFA07A;
+    color:white;
+    border-radius:5px;
 }
 .tela-quizes ul{
     display:flex;
@@ -112,6 +124,7 @@ body{
     margin:20px;
     flex-shrink: 0;
     cursor: pointer;
+    position: relative;
 }
 
 /*TELA NOVO QUIZ*/
